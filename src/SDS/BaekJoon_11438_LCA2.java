@@ -57,18 +57,18 @@ public class BaekJoon_11438_LCA2 {
         }
 
         // 높이 맞추기
-        for(int i=0; i<=logN; i++){
+        /*for(int i=0; i<=logN; i++){
             if(((depth[a]-depth[b]) & (1<<i)) >=1){ // 비트 AND 연산 => 둘다 1일 경우 1로 반환
                 a = parent[i][a];
             }
-        }
+        }*/
 
         // 높이 맞추기 -> 다른 방법
-        /*for(int i=0; i<=logN; i++){
+        for(int i=0; i<=logN; i++){
             if(Math.pow(2,i)>=(depth[a]-depth[b])){
                 a = parent[i][a];
             }
-        }*/
+        }
 
         // 높이 맞췄으면 같은지 검사
         if(a==b){
@@ -91,26 +91,27 @@ public class BaekJoon_11438_LCA2 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
 
-        tree = new ArrayList[n+1];
+        n = Integer.parseInt(br.readLine());
+
+        tree = new ArrayList[n + 1];
         visited = new boolean[n + 1];
         depth = new int[n + 1];
         parent = new int[logN + 1][n+1]; // 시간복잡도상 첫번째 배열에 적은 수 넣는 것이 더 효율적
+
 
         for(int i=0; i<=n; i++){
             tree[i] = new ArrayList<>();
         }
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        n = Integer.parseInt(br.readLine());
-
         for(int i=1; i<n; i++){
+            st = new StringTokenizer(br.readLine());
+
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             tree[a].add(b);
             tree[b].add(a);
-
         }
 
         bfs(1);
