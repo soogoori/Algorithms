@@ -17,7 +17,7 @@ public class BOJ_1939_중량제한 {
 
     static int N, M;
     static int x,y; // 공장이 위치해 있는 섬의 번호
-    static long total;
+    static long result;
     static ArrayList<Info>[] arr;
 
     static class Info{
@@ -58,7 +58,7 @@ public class BOJ_1939_중량제한 {
 
             if (bfs(mid)) {
                 l = mid + 1;
-                total = mid;
+                result = mid;
             } else {
                 r = mid-1;
             }
@@ -101,7 +101,7 @@ public class BOJ_1939_중량제한 {
 
         binarySearch(left, right);
 
-        bw.write(String.valueOf(total));
+        bw.write(String.valueOf(result));
         bw.close();
         br.close();
     }
