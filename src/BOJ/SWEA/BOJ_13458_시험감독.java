@@ -1,4 +1,4 @@
-package BOJ.Samsung;
+package BOJ.SWEA;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

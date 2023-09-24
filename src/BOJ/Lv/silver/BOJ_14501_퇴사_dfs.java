@@ -9,37 +9,38 @@ import java.util.StringTokenizer;
  */
 public class BOJ_14501_퇴사_dfs {
 
-    static int[][] consult;
-    static int N, result;
+    static int N, answer;
+    static int[] T, P;
 
-    static void dfs(int day, int profit){
-
-        if(day>=N){
-            result = Math.max(profit, result);
+    static void dfs(int day, int price) {
+        if (day >= N) {
+            answer = Math.max(answer, price);
             return;
         }
-        if(day+consult[day][0]<=N){
-            dfs(day+consult[day][0], profit+consult[day][1]);
-        }else{
-            dfs(day+consult[day][0], profit);
-        }
-    }
 
+        if (day + T[day] <= N) {
+            dfs(day + T[day], P[day] + price);
+        } else {
+            dfs(day + T[day], price);
+        }
+        dfs(day + 1, price);
+    }
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
         N = Integer.parseInt(br.readLine());
-        consult = new int[N + 1][2];
 
-        for(int i=1; i<=N; i++){
+        T = new int[N];
+        P = new int[N];
+
+        for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            int T = Integer.parseInt(st.nextToken());
-            int P = Integer.parseInt(st.nextToken());
 
-            consult[i][0] = T;
-            consult[i][1] = P;
+            T[i] = Integer.parseInt(st.nextToken());
+            P[i] = Integer.parseInt(st.nextToken());
         }
-
+        dfs(0, 0);
+        System.out.println(answer);
     }
 }
